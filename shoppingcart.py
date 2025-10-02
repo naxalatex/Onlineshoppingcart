@@ -1,4 +1,4 @@
-# Online Shopping Cart for Bike Engines (OOP in Python - Menu Driven)
+#Online Shopping Cart for Bike Engines
 
 class Engine:
     def __init__(self, engine_id, name, price, horsepower):
@@ -10,7 +10,6 @@ class Engine:
     def __str__(self):
         return f"{self.engine_id}. {self.name} ({self.horsepower} HP) - ₹{self.price}"
 
-
 class CartItem:
     def __init__(self, engine, quantity=1):
         self.engine = engine
@@ -21,7 +20,6 @@ class CartItem:
 
     def __str__(self):
         return f"{self.engine.name} x {self.quantity} = ₹{self.total_price()}"
-
 
 class ShoppingCart:
     def __init__(self):
@@ -47,19 +45,17 @@ class ShoppingCart:
         return sum(item.total_price() for item in self.items)
 
 
-# Sample engines available in the store
+# engines available in the store
 engines = [
     Engine(1, "Yamaha 150cc Engine", 55000, 150),
     Engine(2, "KTM 200cc Engine", 85000, 200),
     Engine(3, "Royal Enfield 350cc Engine", 120000, 350),
-    Engine(4, "Honda 500cc Engine", 200000, 500)
-]
+    Engine(4, "Honda 500cc Engine", 200000, 500)]
 
 def show_store():
     print("\n=== Available Bike Engines ===")
     for engine in engines:
         print(engine)
-
 
 if __name__ == "__main__":
     cart = ShoppingCart()
@@ -81,13 +77,13 @@ if __name__ == "__main__":
             show_store()
             try:
                 eng_id = int(input("Enter Engine ID to add: "))
-                qty = int(input("Enter quantity: "))
+                quantity = int(input("Enter quantity: "))
                 selected = next((e for e in engines if e.engine_id == eng_id), None)
                 if selected:
-                    cart.add_item(selected, qty)
-                    print(f"✅ {selected.name} x{qty} added to cart.")
+                    cart.add_item(selected, quantity)
+                    print(f" {selected.name} x{quantity} added to cart.")
                 else:
-                    print("❌ Invalid Engine ID.")
+                    print(" Invalid Engine ID.")
             except ValueError:
                 print("⚠ Please enter valid numbers.")
 
@@ -95,18 +91,18 @@ if __name__ == "__main__":
             try:
                 eng_id = int(input("Enter Engine ID to remove: "))
                 cart.remove_item(eng_id)
-                print("🗑 Engine removed from cart (if it existed).")
+                print("Engine removed from cart.")
             except ValueError:
-                print("⚠ Please enter a valid number.")
+                print("Please enter a valid number.")
 
         elif choice == "4":
             print(cart.view_cart())
 
         elif choice == "5":
-            print("\n🛒 Final Cart Summary:")
+            print("\n Final Cart Summary:")
             print(cart.view_cart())
-            print("✅ Thank you for shopping with us!")
+            print("Thank you for shopping with us!")
             break
 
         else:
-            print("⚠ Invalid choice! Please enter a number between 1-5.")
+            print("Invalid choice! Please enter a number between 1-5.")
